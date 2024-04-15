@@ -7,6 +7,11 @@ from llama_index.core.chat_engine.types import (
 )
 from llama_index.core.schema import NodeWithScore
 from llama_index.core.llms import ChatMessage, MessageRole
+from llama_index.query_engine.pandas_query_engine import (
+    PandasQueryEngine,
+    default_output_processor,
+)
+import pandas as pd
 from app.engine import get_chat_engine
 
 chat_router = r = APIRouter()
@@ -88,8 +93,19 @@ async def chat(
     chat_engine: BaseChatEngine = Depends(get_chat_engine),
 ):
     last_message_content, messages = await parse_chat_data(data)
+    response = None
+    df = pd.DataFrame(
+        {
+            "city": ["Toronto", "Tokyo", "Berlin"],
+            "population": [2930000, 13960000, 3645000],
+        }
+    )
+    query_engine = PandasQueryEngine(df=df, verbose=True)
 
-    response = await chat_engine.astream_chat(last_message_content, messages)
+    # Run it with pandas first
+    response = query_engine.query(last_message_content)
+    if not response:
+        response = await chat_engine.astream_chat(last_message_content, messages)
 
     async def event_generator():
         async for token in response.async_response_gen():

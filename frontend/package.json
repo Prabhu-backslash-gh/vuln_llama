@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.0.2",
+    "axios": "0.18.0",
     "ai": "^2.2.27",
     "class-variance-authority": "^0.7.0",
     "clsx": "^1.2.1",
@@ -27,6 +28,7 @@
     "remark-code-import": "^1.2.0",
     "remark-gfm": "^3.0.1",
     "remark-math": "^5.1.1",
+    "remark-html": "14.0.0",
     "supports-color": "^8.1.1",
     "tailwind-merge": "^2.1.0"
   },

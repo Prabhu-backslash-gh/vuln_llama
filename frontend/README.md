@@ -2,21 +2,10 @@ This is a [LlamaIndex](https://www.llamaindex.ai/) project using [Next.js](https
 
 ## Getting Started
 
-First, install the dependencies:
+Install the dependencies and run dev
 
 ```
 npm install
-```
-
-Second, generate the embeddings of the documents in the `./data` directory (if this folder exists - otherwise, skip this step):
-
-```
-npm run generate
-```
-
-Third, run the development server:
-
-```
 npm run dev
 ```
 
@@ -34,22 +23,7 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 docker build -t <your_app_image_name> .
 ```
 
-2. Generate embeddings:
-
-Parse the data and generate the vector embeddings if the `./data` folder exists - otherwise, skip this step:
-
-```
-docker run \
-  --rm \
-  -v $(pwd)/.env:/app/.env \ # Use ENV variables and configuration from your file-system
-  -v $(pwd)/config:/app/config \
-  -v $(pwd)/data:/app/data \
-  -v $(pwd)/cache:/app/cache \ # Use your file system to store the vector database
-  <your_app_image_name> \
-  npm run generate
-```
-
-3. Start the app:
+2. Start the app:
 
 ```
 docker run \
@@ -60,12 +34,3 @@ docker run \
   -p 3000:3000 \
   <your_app_image_name>
 ```
-
-## Learn More
-
-To learn more about LlamaIndex, take a look at the following resources:
-
-- [LlamaIndex Documentation](https://docs.llamaindex.ai) - learn about LlamaIndex (Python features).
-- [LlamaIndexTS Documentation](https://ts.llamaindex.ai) - learn about LlamaIndex (Typescript features).
-
-You can check out [the LlamaIndexTS GitHub repository](https://github.com/run-llama/LlamaIndexTS) - your feedback and contributions are welcome!

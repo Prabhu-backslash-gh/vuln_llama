@@ -72,22 +72,7 @@ ENVIRONMENT=prod python main.py
 docker build -t <your_backend_image_name> .
 ```
 
-2. Generate embeddings:
-
-Parse the data and generate the vector embeddings if the `./data` folder exists - otherwise, skip this step:
-
-```
-docker run \
-  --rm \
-  -v $(pwd)/.env:/app/.env \ # Use ENV variables and configuration from your file-system
-  -v $(pwd)/config:/app/config \
-  -v $(pwd)/data:/app/data \ # Use your local folder to read the data
-  -v $(pwd)/storage:/app/storage \ # Use your file system to store the vector database
-  <your_backend_image_name> \
-  python app/engine/generate.py
-```
-
-3. Start the API:
+2. Start the API:
 
 ```
 docker run \
@@ -97,11 +82,3 @@ docker run \
   -p 8000:8000 \
   <your_backend_image_name>
 ```
-
-## Learn More
-
-To learn more about LlamaIndex, take a look at the following resources:
-
-- [LlamaIndex Documentation](https://docs.llamaindex.ai) - learn about LlamaIndex.
-
-You can check out [the LlamaIndex GitHub repository](https://github.com/run-llama/llama_index) - your feedback and contributions are welcome!
